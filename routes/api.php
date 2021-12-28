@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\API\ApiTareasControler;
+
+use App\Http\Controllers\API\ApiTasksControler;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/dashboard/tareas/{id}', [ApiTareasControler::class, 'index'])->name('tareas');
+Route::get('/dashboard/tasks/{id}', [ApiTasksControler::class, 'index'])->name('tasks');
 
-Route::post('/dashboard/tareas/store', [ApiTareasControler::class, 'store'])->name('store');
+Route::post('/dashboard/tasks/store', [ApiTasksControler::class, 'store'])->name('store');

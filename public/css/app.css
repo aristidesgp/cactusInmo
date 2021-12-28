@@ -996,9 +996,6 @@ select {
 .col-end-3 {
   grid-column-end: 3;
 }
-.col-end-4 {
-  grid-column-end: 4;
-}
 .m-2 {
   margin: 0.5rem;
 }
@@ -1089,9 +1086,6 @@ select {
 }
 .block {
   display: block;
-}
-.inline {
-  display: inline;
 }
 .flex {
   display: flex;

@@ -1,27 +1,27 @@
 import React, { useEffect, useState } from 'react'
-import tareaServices from "../components/services/Tarea"
+import taskServices from "./services/Task"
 import List from './List';
 
 export default function Form (props) {
     const [name, setName]=useState(null)
-    const [descripcion, setDescripcion]=useState(null)
-    const [fecha, setFecha]=useState(null)
-    const propiedad_id=props.id
+    const [description, setDescription]=useState(null)
+    const [date, setDate]=useState(null)
+    const property_id=props.id
 
     const [validator, setValidator]=useState(true);
     
-    const storeTarea = async ()=>{
-        if (name.trim()!==""&&descripcion.trim()!==""&&fecha.trim()!=="") {
+    const storeTask = async ()=>{
+        if (name.trim()!==""&&description.trim()!==""&&date.trim()!=="") {
             const data ={
-                name, descripcion, fecha, propiedad_id
+                name, description, date, property_id
             }
-            const res = await  tareaServices.store(data)
+            const res = await  taskServices.store(data)
             if (res.succes) {
-                props.getTareas()
+                props.getTasks()
                 setValidator(true)              
                 setName("")
-                setDescripcion("")
-                setFecha("")                                             
+                setDescription("")
+                setDate("")                                             
             } else {
                 alert(res.message)             
             }              
@@ -49,18 +49,18 @@ export default function Form (props) {
                   </div>
                     <div class="flex-grow ml-4">
                       <input type="date" placeholder="Fecha" class=" text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
-                      onChange={(event)=>setFecha(event.target.value)}
-                      value={fecha}
+                      onChange={(event)=>setDate(event.target.value)}
+                      value={date}
                       />
                      </div>
                </div>                 
                 <textarea rows="5" cols="30" class=" text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
-                onChange={(event)=>setDescripcion(event.target.value)}
-                value={descripcion}
+                onChange={(event)=>setDescription(event.target.value)}
+                value={description}
                 />
                 <div class="flex flex-grow w-1/4 py-4">
                <button
-                    onClick={storeTarea}                                 
+                    onClick={storeTask}                                 
                     class="border col-end-5 border-green-500 text-green-500 rounded-md px-4 py-2 transition duration-500 ease select-none hover:text-white hover:bg-green-600 focus:outline-none focus:shadow-outline"
                 >
                     Agregar

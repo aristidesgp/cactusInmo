@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import tareaServices from "../components/services/Tarea"
 
-export default function List({listTareas}) {
+export default function List({taskList}) {
     
     
     return (
@@ -32,7 +31,7 @@ export default function List({listTareas}) {
                         </thead>
                         <tbody class="text-sm divide-y divide-gray-100">                            
                             {
-                                listTareas.map((task)=>{
+                                taskList.map((task)=>{
                                     return (
                                         <tr key={task.id}>
                                          <td class="p-2 whitespace-nowrap">
@@ -41,7 +40,7 @@ export default function List({listTareas}) {
                                           </div>
                                          </td>
                                          <td class="p-2 whitespace-nowrap">
-                                          <div class="text-left">{task.fecha}</div>
+                                          <div class="text-left">{task.date}</div>
                                          </td>
                                          <td class="p-2 whitespace-nowrap">
                                           <div class="text-left font-medium text-green-500">

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTareasTable extends Migration
+class CreatePropertiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,10 @@ class CreateTareasTable extends Migration
      */
     public function up()
     {
-        Schema::create('tareas', function (Blueprint $table) {
+        Schema::create('properties', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('descripcion');
-            $table->date('fecha');
-
-            $table->unsignedBigInteger('propiedad_id');
-
-            $table->foreign('propiedad_id')->references('id')->on('propiedads')->onDelete('cascade');
-
+            $table->string('purposeStatus');
             $table->timestamps();
         });
     }
@@ -34,6 +28,6 @@ class CreateTareasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tareas');
+        Schema::dropIfExists('properties');
     }
 }

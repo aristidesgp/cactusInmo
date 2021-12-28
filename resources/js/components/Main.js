@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import ReactDOM from 'react-dom'
-import tareaServices from "../components/services/Tarea"
+import taskServices from "./services/Task"
 import '../../../public/css/app.css'
 import Form from './Form';
 import List from './List';
@@ -8,16 +8,14 @@ import List from './List';
 export default function Main () {    
     const splitUrl=location.href.split("/")
     const id=splitUrl[splitUrl.length-1]
-    const [refresch, setRefresh]=useState(false)
+    const [taskList, setTaskList]= useState([])
 
-    const [listTareas, setListTareas]= useState([])
-
-    const getTareas=async ()=> {
-        const resp= await tareaServices.list(id)
-        setListTareas(resp.data)        
+    const getTasks=async ()=> {
+        const resp= await taskServices.list(id)
+        setTaskList(resp.data)        
     }
     useEffect(()=>{
-        getTareas()               
+        getTasks()               
     },[])   
     
     
@@ -26,9 +24,9 @@ export default function Main () {
             <div className="container text-center flex flex-row">
                 <Form 
                 id={id}
-                getTareas={getTareas}                
+                getTasks={getTasks}                
                 />
-                <List listTareas={listTareas}/>
+                <List taskList={taskList}/>
             </div>
         )
     

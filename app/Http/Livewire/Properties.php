@@ -3,15 +3,15 @@
 namespace App\Http\Livewire;
 
 use App\Http\Controllers\ApiController;
-use App\Models\Propiedad;
+use App\Models\Property;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class Propiedads extends Component
+class Properties extends Component
 {
     use WithPagination;
     public $selectedStatus="";
-    public $propiedads, $id_propiedad, $name, $purposeStatus;
+    public $property_id, $name, $purposeStatus;
     public $modal=false;
     public $search="";
 
@@ -20,10 +20,9 @@ class Propiedads extends Component
     ];
     
     public function render()
-    {
-        //dd($this->search);     
-        return view('livewire.propiedads',[
-            'propiedades'=>Propiedad::
+    {        
+        return view('livewire.properties',[
+            'properties'=>Property::
             where(
                 'purposeStatus',
                 'LIKE',
@@ -47,19 +46,18 @@ class Propiedads extends Component
     }
     
     public function sincro(){
-       $apicontrol=new ApiController();
-       //$apicontrol->saveData();
+       $apicontrol=new ApiController();       
        $data=$apicontrol->getApiData();       
         
-        foreach ($data as $valor){
-            $resul=Propiedad::where('id',intval($valor['id']))->get();
-            $inmob=new Propiedad();
+        foreach ($data as $item){
+            $resul=Property::where('id',intval($item['id']))->get();
+            $inmob=new Property();
             if (count($resul)==0) {
-                $inmob->id=intval($valor['id']);
+                $inmob->id=intval($item['id']);
             }            
-            $inmob->name=$valor['address'];                          
+            $inmob->name=$item['address'];                          
             
-            switch ($valor['purposeStatus']['id']) {
+            switch ($item['purposeStatus']['id']) {
                 case '1':
                     $inmob->purposeStatus='For Sale';
                     $inmob->save();                    
@@ -99,49 +97,49 @@ class Propiedads extends Component
         } 
     }
 
-    public function destroy(Propiedad $propiedad)
+    public function destroy(Property $property)
     {
-        $propiedad->delete();
+        $property->delete();
         
     }
-    public function goToTareas(Propiedad $propiedad)
+    public function goToTasks(Property $property)
     {        
-        return redirect()->route('tareas',$propiedad);
+        return redirect()->route('tasks',$property);
         
     }
-    public function crear(){
-        $this->limpiarCampos();
-        $this->abrirModal();
+    public function create(){
+        $this->cleanFields();
+        $this->openModal();
     }
-    public function abrirModal(){
+    public function openModal(){
         $this->modal=true;
     }
-    public function cerrarModal(){
+    public function closeModal(){
         $this->modal=false;
     }
-    public function limpiarCampos(){
-        $this->id_propiedad='';
+    public function cleanFields(){
+        $this->property_id='';
         $this->name='';
         $this->purposeStatus='';
     }
-    public function editar($id){
-        $propiedad=Propiedad::findOrFail($id);
-        $this->id_propiedad=$id;
-        $this->name=$propiedad->name;
-        $this->purposeStatus=$propiedad->purposeStatus;
-        $this->abrirModal();
+    public function edit($id){
+        $property=Property::findOrFail($id);
+        $this->property_id=$id;
+        $this->name=$property->name;
+        $this->purposeStatus=$property->purposeStatus;
+        $this->openModal();
     }
 
-    public function guardar(){
+    public function save(){
 
         $this->validate();
 
-        Propiedad::updateOrCreate(['id'=>$this->id_propiedad],
+        Property::updateOrCreate(['id'=>$this->property_id],
         [
             'name'=>$this->name,
             'purposeStatus'=>$this->purposeStatus
         ]);
-        $this->cerrarModal();
-        $this->limpiarCampos();
+        $this->closeModal();
+        $this->cleanFields();
     }
 }

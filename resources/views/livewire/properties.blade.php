@@ -23,31 +23,31 @@
                 >                
         </div>        
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-            @foreach ($propiedades as $propiedad)
+            @foreach ($properties as $property)
             <div class="p-2" >
-                <div class="bg-white @if ($propiedad->purposeStatus=='For Sale')bg-red-200 @endif overflow-hidden hover:bg-green-100 border border-gray-200 p-3">
+                <div class="bg-white @if ($property->purposeStatus=='For Sale')bg-red-200 @endif overflow-hidden hover:bg-green-100 border border-gray-200 p-3">
                     <div  class="m-2 text-justify text-sm">                          
-                        <h2 class="font-bold text-lg h-2 mb-8">Nombre: {{$propiedad->name}} </h2>
+                        <h2 class="font-bold text-lg h-2 mb-8">Nombre: {{$property->name}} </h2>
                         <p class="text-xs">
-                        Id: {{$propiedad->id}}
+                        Id: {{$property->id}}
                         </p> 
                         <p class="text-xs">
-                        Estado:{{$propiedad->purposeStatus}}
+                        Estado:{{$property->purposeStatus}}
                         </p>              
                     </div>
                     <div class="flex flex-nowrap space-x-2 mx-auto">
-                        <button wire:click="goToTareas({{$propiedad}})" class="p-2 pl-3 pr-3 bg-blue-500 text-gray-100 text-base rounded-lg focus:border-4 border-blue-300">Recordatorios</button>
-                        <button wire:click="editar({{$propiedad->id}})" class="p-2 pl-3 pr-3 bg-gray-500 text-gray-100 text-base rounded-lg focus:border-4 border-gray-300">Editar</button>
+                        <button wire:click="goToTasks({{$property}})" class="p-2 pl-3 pr-3 bg-blue-500 text-gray-100 text-base rounded-lg focus:border-4 border-blue-300">Recordatorios</button>
+                        <button wire:click="edit({{$property->id}})" class="p-2 pl-3 pr-3 bg-gray-500 text-gray-100 text-base rounded-lg focus:border-4 border-gray-300">Editar</button>
                         @if ($modal)
                            @include('livewire.modal')                            
                         @endif
-                        <button wire:click="destroy({{$propiedad}})" class="p-2 pl-3 pr-3 bg-yellow-500 text-gray-100 text-base rounded-lg focus:border-4 border-yellow-300">Eliminar</button>                                          
+                        <button wire:click="destroy({{$property}})" class="p-2 pl-3 pr-3 bg-yellow-500 text-gray-100 text-base rounded-lg focus:border-4 border-yellow-300">Eliminar</button>                                          
                     </div>
                 </div>                
             </div>                       
             @endforeach            
         </div>
         <div class="mt-4 ">
-            {{ $propiedades->links() }}        
+            {{ $properties->links() }}        
         </div>              
 </div>

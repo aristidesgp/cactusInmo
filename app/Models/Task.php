@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Tarea extends Model
+class Task extends Model
 {
     use HasFactory;
-    protected $fillable=['name', 'descripcion', 'fecha'];
+    protected $fillable=['name', 'description', 'date'];
     //Relacion uno a muchos
-    public function tareas(){
-        return $this->hasMany(Propiedad::class);
+    public function tasks(){
+        return $this->hasMany(Property::class);
     }
 }

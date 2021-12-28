@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\TareaController;
-use App\Http\Livewire\Propiedads;
+
+use App\Http\Controllers\TaskController;
+use App\Http\Livewire\Properties;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +21,6 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function(){
-    Route::get('/dashboard',Propiedads::class)->name('dashboard');
-    Route::get('/dashboard/tareas/{propiedad}', [TareaController::class, 'index'])->name('tareas');    
+    Route::get('/dashboard',Properties::class)->name('dashboard');
+    Route::get('/dashboard/tasks/{property}', [TaskController::class, 'index'])->name('tasks');    
 });
