@@ -1,4 +1,4 @@
-CactusInmo Example
+CactusInmo
 
 Real estate management application made with Laravel 8, LiveWire, MySQL & React JS
 
